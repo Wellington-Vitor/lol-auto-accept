@@ -3,29 +3,12 @@ import sys
 import threading
 from time import sleep
 from tkinter import Tk, Label, Button, Frame
-
 import pyautogui
-
 from ui import theme
-
-ACCEPT_IMAGES = [
-    "assets/aceitar1.png",
-    "assets/aceitar2.png",
-    "assets/aceitar3.png",
-    "assets/aceitar4.png",
-]
+from core.image_search import check_screen_accept
+from core.utils.resource import resource_path
 
 running = False
-
-
-def resource_path(relative_path):
-    try:
-        base_path = sys._MEIPASS
-    except AttributeError:
-        base_path = os.path.dirname(os.path.abspath(__file__))
-
-    return os.path.join(base_path, relative_path)
-
 
 def update_status(text, color):
     window.after(
@@ -35,24 +18,6 @@ def update_status(text, color):
             fg=color
         )
     )
-
-
-def check_screen_accept():
-    for image in ACCEPT_IMAGES:
-        try:
-            button = pyautogui.locateOnScreen(
-                resource_path(image),
-                confidence=0.7
-            )
-
-            if button:
-                return button
-
-        except pyautogui.ImageNotFoundException:
-            pass
-
-    return None
-
 
 def bot_loop():
     global running
