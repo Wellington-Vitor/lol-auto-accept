@@ -1,8 +1,11 @@
 import threading
+import time
+from core.pick import auto_pick
 
 from core.bot import Bot
 
 from ui.window import create_window, create_buttons
+
 
 
 # ==========================
@@ -35,5 +38,9 @@ start_button, stop_button = create_buttons(
     start_bot,
     stop_bot
 )
+
+time.sleep(3)
+
+auto_pick("Gragas")
 
 window.mainloop()
